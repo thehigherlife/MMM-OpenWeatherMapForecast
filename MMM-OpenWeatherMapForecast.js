@@ -411,17 +411,21 @@ Module.register("MMM-OpenWeatherMapForecast", {
         //accumulation
         if (snowAccumulation) {
             accumulationtype = "snow";
-            if (typeof snowAccumulation === "number") {
-                accumulation = Math.round(snowAccumulation) + " " + this.getUnit("accumulationSnow");
+            if (typeof snowAccumulation === "number" && this.config.units === "imperial") {
+                accumulation = Number((Math.round(snowAccumulation)/25.4).toFixed(2)) + " " + this.getUnit("accumulationSnow");
             } else if (typeof snowAccumulation === "object" && snowAccumulation["1h"]) {
                 accumulation = Math.round(snowAccumulation["1h"]) + " " + this.getUnit("accumulationSnow");
+            } else if (typeof snowAccumulation === "number" && this.config.units === "metric") {
+                accumulation = Math.round(snowAccumulation) + " " + this.getUnit("accumulationSnow");
             }
         } else if (rainAccumulation) {
             accumulationtype = "rain";
-            if (typeof rainAccumulation === "number") {
-                accumulation = Math.round(rainAccumulation) + " " + this.getUnit("accumulationRain");
+            if (typeof rainAccumulation === "number" && this.config.units === "imperial") {
+                accumulation = Number((Math.round(rainAccumulation)/25.4).toFixed(2)) + " " + this.getUnit("accumulationRain");
             } else if (typeof rainAccumulation === "object" && rainAccumulation["1h"]) {
                 accumulation = Math.round(rainAccumulation["1h"]) + " " + this.getUnit("accumulationRain");
+            } else if (typeof rainAccumulation === "number" && this.config.units === "metric") {
+                accumulation = Math.round(rainAccumulation) + " " + this.getUnit("accumulationRain");
             }
         }
 
@@ -475,12 +479,12 @@ Module.register("MMM-OpenWeatherMapForecast", {
      */
     units: {
         accumulationRain: {
-            imperial: "mm",
+            imperial: "in.",
             metric: "mm",
             "": "mm"
         },
         accumulationSnow: {
-            imperial: "mm",
+            imperial: "in.",
             metric: "mm",
             "": "mm"
         },
