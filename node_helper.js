@@ -40,7 +40,7 @@ module.exports = NodeHelper.create({
                 console.log("[MMM-OpenWeatherMapForecast] " + moment().format("D-MMM-YY HH:mm") + " ** ERROR ** Latitude and/or longitude not provided.");
             } else {
 
-                //make request to OpenWeather onecall API
+                //make request to OpenWeather onecall API, using 3.0 instead of 2.5
                 var url = "https://api.openweathermap.org/data/3.0/onecall" +
                     "?appid=" + payload.apikey +
                     "&lat=" + payload.latitude +
